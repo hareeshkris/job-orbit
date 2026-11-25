@@ -1,10 +1,8 @@
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import './index.css'
-import App from './App.tsx'
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import { RouterProvider } from "react-router/dom";
+import { router } from "./app/router.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  <BrowserRouter basename="/job-orbit">
-    <App />
-  </BrowserRouter>,
+  <RouterProvider router={router} />,
 );
