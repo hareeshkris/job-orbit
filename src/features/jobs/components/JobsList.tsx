@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from "react";
 import type { Job } from "../../../types/job.types";
 import JobCard from "./JobCard";
 import JobsListEmpty from "./JobsListEmpty";
@@ -9,9 +10,18 @@ type JobsListProps = {
   isLoading: boolean;
   isError: boolean;
   onRetry?: () => void;
+  setSortOrder: Dispatch<SetStateAction<"latest" | "oldest">>;
+  sortOrder:"latest" | "oldest"
 };
 
-const JobsList = ({ jobs, isLoading, isError, onRetry }: JobsListProps) => {
+const JobsList = ({
+  jobs,
+  isLoading,
+  isError,
+  onRetry,
+  sortOrder,
+  setSortOrder
+}: JobsListProps) => {
   return (
     <section className="jobs-list">
       <div className="jobs-list-header">
@@ -20,7 +30,7 @@ const JobsList = ({ jobs, isLoading, isError, onRetry }: JobsListProps) => {
           <p>Explore opportunities from top companies</p>
         </div>
 
-        <select defaultValue="latest">
+        <select onChange={(e) => setSortOrder(e.target.value as "latest" | "oldest")} value={sortOrder}>
           <option value="latest">Latest Jobs</option>
           <option value="oldest">Oldest First</option>
         </select>

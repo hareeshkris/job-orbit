@@ -17,6 +17,22 @@ const JobCard = ({ job }: JobCardProps) => {
 
     return days;
   };
+
+  const getJobType = (jobType: string) => {
+    switch (jobType) {
+      case "full_time":
+        return "Full Time";
+      case "part_time":
+        return "Part Time";
+      case "contract":
+        return "Contract";
+      case "freelance":
+        return "Freelance";
+      default:
+        return "--";
+    }
+  };
+
   return (
     <div className="job-card">
       <div className="company-logo">{companyLogo(job.company_name)}</div>
@@ -27,7 +43,7 @@ const JobCard = ({ job }: JobCardProps) => {
 
         <div className="job-meta">
           <span>📍 {job?.candidate_required_location}</span>
-          <span>💼 {job?.job_type}</span>
+          <span>💼 {getJobType(job?.job_type)}</span>
           <span>{job?.salary}</span>
         </div>
       </div>

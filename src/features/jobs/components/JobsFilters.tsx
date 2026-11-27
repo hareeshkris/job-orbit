@@ -1,4 +1,24 @@
-const JobsFilters = () => {
+import type { ChangeEvent, Dispatch, SetStateAction } from "react";
+
+type JobsFiltersType = {
+  selectedJobType: string[];
+  setSelectedJobType: Dispatch<SetStateAction<string[]>>;
+};
+
+const JobsFilters = ({
+  selectedJobType,
+  setSelectedJobType,
+}: JobsFiltersType) => {
+  const handleJobType = (e: ChangeEvent<HTMLInputElement>, type: string) => {
+    if (e.target.checked) {
+      setSelectedJobType((prev) => [...prev, type]);
+    } else {
+      setSelectedJobType((prev) =>
+        prev.filter((job_type) => job_type !== type),
+      );
+    }
+  };
+  
   return (
     <aside className="jobs-filters">
       <h3>Filters</h3>
@@ -6,16 +26,40 @@ const JobsFilters = () => {
       <div className="filter-group">
         <h4>Job Type</h4>
         <label>
-          <input type="checkbox" /> Full-time
+          <input
+            type="checkbox"
+            onChange={(e) => handleJobType(e, "full_time")}
+            checked={selectedJobType.includes("full_time")}
+            value="full_time"
+          />{" "}
+          Full-time
         </label>
         <label>
-          <input type="checkbox" /> Part-time
+          <input
+            type="checkbox"
+            value={"part_time"}
+            onChange={(e) => handleJobType(e, "part_time")}
+            checked={selectedJobType.includes("part_time")}
+          />{" "}
+          Part-time
         </label>
         <label>
-          <input type="checkbox" /> Contract
+          <input
+            type="checkbox"
+            value={"contract"}
+            onChange={(e) => handleJobType(e, "contract")}
+            checked={selectedJobType.includes("contract")}
+          />{" "}
+          Contract
         </label>
         <label>
-          <input type="checkbox" /> Internship
+          <input
+            type="checkbox"
+            value={"freelance"}
+            onChange={(e) => handleJobType(e, "freelance")}
+            checked={selectedJobType.includes("freelance")}
+          />{" "}
+          Internship
         </label>
       </div>
 
